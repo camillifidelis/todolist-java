@@ -1,16 +1,28 @@
 package br.com.camillifidelis.todolist.user;
 
+import java.time.LocalDateTime;
+import java.util.UUID;
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import lombok.Data;
 
-// @Getter - colocar só getters
-// @Setter - colocar só setters
-
-@Data // getters e setters
+@Data
+@Entity(name = "tb_users")
 public class UserModel {
 
-    // se quiser get e set só de um atributo, colocar @Getter e @Setter em cima dele
+    @Id
+    @GeneratedValue(generator = "UUID")
+    private UUID id;
+
+    @Column(unique = true)
     private String username;
     private String name;
     private String password;
 
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 }
